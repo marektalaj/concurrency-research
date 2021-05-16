@@ -1,10 +1,10 @@
-package task;
+package solution;
 
 import java.util.stream.IntStream;
 
-public class ParallelStreamSolution extends Solution {
+public class StreamSolution extends Solution {
     @Override
-    public Long sumList(int[] listOfNumbers) {
+    public long sumList(int[] listOfNumbers) {
         return (long) IntStream.of(listOfNumbers)
                 .sum();
     }

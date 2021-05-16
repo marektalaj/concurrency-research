@@ -1,10 +1,10 @@
-package task;
+package solution;
 
 public class SequentialSolution extends Solution {
 
     @Override
-    public Long sumList(int[] listOfNumbers) {
-        Long accumulator = 0L;
+    public long sumList(int[] listOfNumbers) {
+        long accumulator = 0L;
         for (int i = 0; i < listOfNumbers.length; i++) {
             accumulator += listOfNumbers[i];
         }

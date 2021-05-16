@@ -9,6 +9,12 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import solution.BoxedStreamSolution;
+import solution.FixedThreadPoolSolution;
+import solution.ParallelStreamSolution;
+import solution.SequentialSolution;
+import solution.Solution;
+import solution.StreamSolution;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,15 +28,27 @@ public class TaskRunner {
 
     @Setup
     public void setUpList() {
-        this.listOfNumbers = TableGenerator.createList(1000000);
+        this.listOfNumbers = TableGenerator.createList(100000000);
     }
 
     @Benchmark
-    public Long sequentialSum() {
+    public long parallelStreamSum() {
+//        StopWatch stopWatch = new StopWatch();
+//        stopWatch.start();
+        Solution solution = new ParallelStreamSolution();
+        long result = solution.sumList(this.listOfNumbers);
+//        stopWatch.stop();
+//        System.out.println(result);
+//        System.out.println("Parallel: " + stopWatch.formatTime());
+        return result;
+    }
+
+    @Benchmark
+    public long sequentialSum() {
 //        StopWatch stopWatch = new StopWatch();
 //        stopWatch.start();
         Solution solution = new SequentialSolution();
-        Long result = solution.sumList(this.listOfNumbers);
+        long result = solution.sumList(this.listOfNumbers);
 //        stopWatch.stop();
 //        System.out.println(result);
 //        System.out.println("Sequential: " + stopWatch.formatTime());
@@ -38,19 +56,44 @@ public class TaskRunner {
     }
 
     @Benchmark
-    public Long parallelStreamSum() {
+    public long streamSum() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Solution solution = new StreamSolution();
+        long result = solution.sumList(this.listOfNumbers);
+        stopWatch.stop();
+        System.out.println(result);
+        System.out.println("IntStream: " + stopWatch.formatTime());
+        return result;
+    }
+
+    @Benchmark
+    public long boxedStreamSum() {
 //        StopWatch stopWatch = new StopWatch();
 //        stopWatch.start();
-        Solution solution = new ParallelStreamSolution();
-        Long result = solution.sumList(this.listOfNumbers);
+        Solution solution = new BoxedStreamSolution();
+        long result = solution.sumList(this.listOfNumbers);
 //        stopWatch.stop();
 //        System.out.println(result);
 //        System.out.println("Parallel: " + stopWatch.formatTime());
         return result;
     }
 
+
+    @Benchmark
+    public long fixedThreadPoolSolution() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Solution solution = new FixedThreadPoolSolution();
+        long result = solution.sumList(this.listOfNumbers);
+        stopWatch.stop();
+        System.out.println(result);
+        System.out.println("Parallel2: " + stopWatch.formatTime());
+        return result;
+    }
+
 //    @Benchmark
-//    public Long parallelStreamSum(){
+//    public long parallelStreamSum(){
 //        Solution solution = new ParallelStreamSolution();
 //        return solution.sumList(this.listOfNumbers);
 //    }
