@@ -1,14 +1,17 @@
 package solution;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SequentialSolution extends Solution {
 
     @Override
-    public long sumList(int[] listOfNumbers) {
-        long accumulator = 0L;
-        for (int i = 0; i < listOfNumbers.length; i++) {
-            accumulator += listOfNumbers[i];
+    public List<Integer> generateList(int numbersToGenerate) {
+        List<Integer> generatedList = new ArrayList<>();
+        for (int i = 0; i < numbersToGenerate; i++) {
+            generatedList.add(Generator.generate());
         }
-        return accumulator;
+        return generatedList;
     }
 
 }
