@@ -12,6 +12,7 @@ import org.openjdk.jmh.annotations.State;
 import solution.CachedThreadPoolSolution;
 import solution.CompletableFutureSolution;
 import solution.FixedThreadPoolSolution;
+import solution.ForkJoinSolution;
 import solution.ManualManagingSolution;
 import solution.ParallelStreamSolution;
 import solution.SequentialSolution;
@@ -65,8 +66,8 @@ public class TaskRunner {
         Solution solution = new StreamSolution();
         List<Integer> result = solution.generateList(this.numberToGenerate);
         stopWatch.stop();
-        // System.out.println(result);
-        // System.out.println("Stream: " + stopWatch.formatTime());
+        System.out.println(result);
+        System.out.println("Stream: " + stopWatch.formatTime());
         return result;
     }
 
@@ -94,44 +95,44 @@ public class TaskRunner {
         return result;
     }
 
-//
-//    @Benchmark
-//    public List<Integer> completableFutureSolution() {
-//        StopWatch stopWatch = new StopWatch();
-//        stopWatch.start();
-//        Solution solution = new CompletableFutureSolution();
-//        List<Integer> result = solution.generateList(this.numberToGenerate);
-//        stopWatch.stop();
-//        // System.out.println(result.size());
-//        // System.out.println("Completable future: " + stopWatch.formatTime());
-//        return result;
-//    }
-//
-//
-//    @Benchmark
-//    public List<Integer> forkJoinSolution() {
-//        StopWatch stopWatch = new StopWatch();
-//        stopWatch.start();
-//        Solution solution = new CachedThreadPoolSolution();
-//        List<Integer> result = solution.generateList(this.numberToGenerate);
-//        stopWatch.stop();
-//        // System.out.println(result.size());
-//        // System.out.println("Cashed thread pool: " + stopWatch.formatTime());
-//        return result;
-//    }
-//
-//
-//    @Benchmark
-//    public List<Integer> manualManagingSolution() {
-//        StopWatch stopWatch = new StopWatch();
-//        stopWatch.start();
-//        Solution solution = new ManualManagingSolution();
-//        List<Integer> result = solution.generateList(this.numberToGenerate);
-//        stopWatch.stop();
-//        // System.out.println(result.size());
-//        // System.out.println("Cashed thread pool: " + stopWatch.formatTime());
-//        return result;
-//    }
+
+    @Benchmark
+    public List<Integer> completableFutureSolution() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Solution solution = new CompletableFutureSolution();
+        List<Integer> result = solution.generateList(this.numberToGenerate);
+        stopWatch.stop();
+        // System.out.println(result.size());
+        // System.out.println("Completable future: " + stopWatch.formatTime());
+        return result;
+    }
+
+
+    @Benchmark
+    public List<Integer> forkJoinSolution() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Solution solution = new ForkJoinSolution();
+        List<Integer> result = solution.generateList(this.numberToGenerate);
+        stopWatch.stop();
+        // System.out.println(result.size());
+        // System.out.println("Fork join threads: " + stopWatch.formatTime());
+        return result;
+    }
+
+
+    @Benchmark
+    public List<Integer> manualManagingSolution() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Solution solution = new ManualManagingSolution();
+        List<Integer> result = solution.generateList(this.numberToGenerate);
+        stopWatch.stop();
+        // System.out.println(result.size());
+        // System.out.println("Manual threads: " + stopWatch.formatTime());
+        return result;
+    }
 
 //    @Benchmark
 //    public long parallelStreamSum(){

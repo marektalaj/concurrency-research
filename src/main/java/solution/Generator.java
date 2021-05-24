@@ -6,7 +6,7 @@ public class Generator {
 
     public static int generate() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(20);
 //            System.out.println((Thread.currentThread().getName()));
         } catch (InterruptedException e) {
             e.printStackTrace();
