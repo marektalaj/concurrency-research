@@ -3,7 +3,7 @@ package solution;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SequentialSolution extends Solution {
+public class SequentialSolution implements Solution {
 
     @Override
     public List<Integer> generateList(int numbersToGenerate) {

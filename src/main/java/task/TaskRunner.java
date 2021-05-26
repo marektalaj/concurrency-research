@@ -20,6 +20,7 @@ import solution.Solution;
 import solution.StreamSolution;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -32,11 +33,11 @@ public class TaskRunner {
 
     @Setup
     public void setUpTaskNumber() {
-        this.numberToGenerate = 1_000;
+        this.numberToGenerate = 1_024;
     }
 
     @Benchmark
-    public List<Integer> parallelStreamSum() {
+    public List<Integer> parallelStreamSum() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new ParallelStreamSolution();
@@ -48,7 +49,7 @@ public class TaskRunner {
     }
 
     @Benchmark
-    public List<Integer> sequentialSum() {
+    public List<Integer> sequentialSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new SequentialSolution();
@@ -60,7 +61,7 @@ public class TaskRunner {
     }
 
     @Benchmark
-    public List<Integer> streamSum() {
+    public List<Integer> streamSum() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new StreamSolution();
@@ -72,7 +73,7 @@ public class TaskRunner {
     }
 
     @Benchmark
-    public List<Integer> fixedThreadPoolSolution() {
+    public List<Integer> fixedThreadPoolSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new FixedThreadPoolSolution();
@@ -84,20 +85,20 @@ public class TaskRunner {
     }
 
     @Benchmark
-    public List<Integer> cashedThreadPoolSolution() {
+    public List<Integer> cashedThreadPoolSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new CachedThreadPoolSolution();
         List<Integer> result = solution.generateList(this.numberToGenerate);
         stopWatch.stop();
-        // System.out.println(result.size());
-        // System.out.println("Cashed thread pool: " + stopWatch.formatTime());
+         System.out.println(result.size());
+         System.out.println("Cashed thread pool: " + stopWatch.formatTime());
         return result;
     }
 
 
     @Benchmark
-    public List<Integer> completableFutureSolution() {
+    public List<Integer> completableFutureSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new CompletableFutureSolution();
@@ -110,34 +111,30 @@ public class TaskRunner {
 
 
     @Benchmark
-    public List<Integer> forkJoinSolution() {
+    public List<Integer> forkJoinSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new ForkJoinSolution();
         List<Integer> result = solution.generateList(this.numberToGenerate);
         stopWatch.stop();
-        // System.out.println(result.size());
-        // System.out.println("Fork join threads: " + stopWatch.formatTime());
+         System.out.println(result.size());
+         System.out.println("Fork join threads: " + stopWatch.formatTime());
         return result;
     }
 
 
     @Benchmark
-    public List<Integer> manualManagingSolution() {
+    public List<Integer> manualManagingSolution() throws ExecutionException, InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Solution solution = new ManualManagingSolution();
         List<Integer> result = solution.generateList(this.numberToGenerate);
         stopWatch.stop();
-        // System.out.println(result.size());
-        // System.out.println("Manual threads: " + stopWatch.formatTime());
+         System.out.println(result.size());
+         System.out.println("Manual threads: " + stopWatch.formatTime());
         return result;
     }
 
-//    @Benchmark
-//    public long parallelStreamSum(){
-//        Solution solution = new ParallelStreamSolution();
-//        return solution.sumList(this.listOfNumbers);
-//    }
+
 
 }

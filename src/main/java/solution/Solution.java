@@ -1,8 +1,9 @@
 package solution;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public abstract class Solution {
-    public abstract List<Integer> generateList(int numbersToGenerate);
+public interface Solution {
+    List<Integer> generateList(int numbersToGenerate) throws InterruptedException, ExecutionException;
 }
 

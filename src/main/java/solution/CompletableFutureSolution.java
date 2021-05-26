@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class CompletableFutureSolution extends Solution {
+public class CompletableFutureSolution implements Solution {
     @Override
     public List<Integer> generateList(int numbersToGenerate) {
         List<CompletableFuture<Integer>> collect = IntStream.range(0, numbersToGenerate)

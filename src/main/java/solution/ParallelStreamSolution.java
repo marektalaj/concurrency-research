@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ParallelStreamSolution extends Solution {
+public class ParallelStreamSolution implements Solution {
     @Override
     public List<Integer> generateList(int numbersToGenerate) {
 

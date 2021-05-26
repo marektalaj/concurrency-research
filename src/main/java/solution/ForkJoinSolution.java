@@ -9,7 +9,7 @@ import java.util.concurrent.RecursiveTask;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ForkJoinSolution extends Solution {
+public class ForkJoinSolution implements Solution {
     @Override
     public List<Integer> generateList(int numbersToGenerate) {
         ForkJoinPool commonPool = ForkJoinPool.commonPool();
@@ -18,16 +18,15 @@ public class ForkJoinSolution extends Solution {
         return customRecursiveTask.join();
     }
 
-    private class CustomRecursiveTask extends RecursiveTask<List<Integer>> {
-        private int sizeToGenerate;
-
+    private static class CustomRecursiveTask extends RecursiveTask<List<Integer>> {
+        public static final int PART_PER_THREAD = 25;
+        private final int sizeToGenerate;
         public CustomRecursiveTask(int sizeToGenerate) {
             this.sizeToGenerate = sizeToGenerate;
         }
-
         @Override
         protected List<Integer> compute() {
-            if (sizeToGenerate > 25) {
+            if (sizeToGenerate > PART_PER_THREAD) {
                 return ForkJoinTask.invokeAll(createSubtasks())
                         .stream()
                         .map((ForkJoinTask<?> forkJoinTask) -> (List<Integer>) forkJoinTask.join())
