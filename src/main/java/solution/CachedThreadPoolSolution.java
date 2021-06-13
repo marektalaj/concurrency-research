@@ -24,7 +24,6 @@ public class CachedThreadPoolSolution implements Solution {
         executorService.shutdown();
         return result;
     }
-
     private Callable<Integer> createFuture() {
         return Generator::generate;
     }
