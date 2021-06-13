@@ -12,15 +12,15 @@ public class Main {
         taskRunner.setUpTaskNumber();
         System.out.println("start");
 //        taskRunner.sequentialSum();
-//        taskRunner.streamSum();
+        taskRunner.streamSum();
 //        taskRunner.parallelStreamSum();
 //        taskRunner.fixedThreadPoolSolution();
-        taskRunner.cashedThreadPoolSolution();
-        taskRunner.manualManagingSolution();
-        taskRunner.forkJoinSolution();
-        taskRunner.completableFutureSolution();
+//        taskRunner.cashedThreadPoolSolution();
+//        taskRunner.manualManagingSolution();
+//        taskRunner.forkJoinSolution();
+//        taskRunner.completableFutureSolution();
     }
-//
+////
 //    public static void main(String[] args) throws Exception {
 //        org.openjdk.jmh.Main.main(args);
 //    }
